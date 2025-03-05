@@ -2,8 +2,12 @@
 ****
 
 #### Как запустить:
-1. Нужно запустить docker контейнер с бд: ``docker compose up -d --build``
-2. Запустить скрипт: ``python -m app``
+1. Сделать .env файл на основе .env.example. 
+2. Нужно запустить docker контейнер с бд: ``docker compose up -d --build``
+3. Создать виртуальное окружение: ``python -m venv venv`` # Linux
+4. Активировать виртуальное окружение ``source venv/bin/activate`` # Linux
+5. Скачать зависимости: ``pip install -r requirements.txt``
+6. Запустить скрипт: ``python -m app``
 
 #### Примечания:
 * Провел небольшой рефакторинг, так как не понял зачем в модулу в data_filler в некоторых циклах приводит результат функции range к list.
