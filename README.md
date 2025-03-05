@@ -2,7 +2,7 @@
 ****
 
 #### Как запустить:
-1. Нужно запустить docker контейнер с бд:``docker compose up -d --build``
+1. Нужно запустить docker контейнер с бд: ``docker compose up -d --build``
 2. Запустить скрипт: ``python -m app``
 
 #### Примечания:
