@@ -1,8 +1,9 @@
 import datetime
 import json
-import uuid
 import random
+import uuid
 
+from app.database import execute_query, create_tables
 
 inns = ["owner_1", "owner_2", "owner_3", "owner_4"]
 status = [1, 2, 3, 4, 10, 13]
@@ -90,9 +91,24 @@ def __make_doc(data: dict) -> dict:
     return doc_data
 
 
-if __name__ == "__main__":
+def add_into_data_table(data: list):
+    for d in data:
+        query = """INSERT INTO public.data (object, status, level, parent, owner) VALUES (%s, %s, %s, %s, %s)"""
+        execute_query(query, (d['object'], d['status'], d['level'], d['parent'], d['owner']))
+
+
+def add_into_documents_table(data: list):
+    for d in data:
+        query = """INSERT INTO public.documents (doc_id, recieved_at, document_type, document_data) VALUES (%s, %s, %s, %s)"""
+        execute_query(query, (d['doc_id'], d['recieved_at'], d['document_type'], d['document_data']))
+
+
+def fill_whole_data():
     data = make_data()
     # данные для базы:
     data_tbl = list(data.values())
     documents_tbl = make_documents(data)
-    print(data_tbl, sep="\n")
+
+    create_tables()
+    add_into_data_table(data_tbl)
+    add_into_documents_table(documents_tbl)
